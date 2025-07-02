@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+<node pkg="tf2_ros" type="static_transform_publisher" name="left_wheel_link" args="0 0.1485 0  0 0 -1.570795 base_link left_wheel" />
+<node pkg="tf2_ros" type="static_transform_publisher" name="right_wheel_link" args="0 -0.1485 0  0 0 -1.570795 base_link right_wheel" />
+
+</launch>

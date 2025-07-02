@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bcr_bot">
+
+  <!-- Ultrasonic Sensor Link -->
+  <link name="ultrasonic_sensor_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joint to Attach Ultrasonic Sensor to Base -->
+  <joint name="ultrasonic_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="ultrasonic_sensor_link"/>
+    <origin xyz="0.25 0 0.05" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Ultrasonic Sensor Plugin -->
+  <gazebo>
+    <sensor type="ray" name="ultrasonic_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>1</samples>
+            <resolution>1</resolution>
+            <min_angle>0.0</min_angle>
+            <max_angle>0.0</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.02</min>
+          <max>20.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+      <plugin name="ultrasonic_sensor_plugin" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <namespace>/ultrasonic</namespace>
+          <remapping>~/out:=/ultrasonic/data</remapping>
+        </ros>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

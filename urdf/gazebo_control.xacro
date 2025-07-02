@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo>
+        <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+            <ros>
+                <namespace>rav_bot</namespace>
+            </ros>
+            
+            <updateRate>10</updateRate>
+            <!-- Wheel Information -->
+            <left_joint>left_wheel_joint</left_joint>
+            <right_joint>right_wheel_joint</right_joint>
+            <wheel_separation>0.297</wheel_separation>
+            <wheel_diameter>0.066</wheel_diameter>
+            <!-- Limits -->
+            <max_wheel_torque>20</max_wheel_torque>
+            <max_wheel_acceleration>1.0</max_wheel_acceleration>
+            <commandTopic>cmd_vel</commandTopic>
+
+            <!-- Output -->
+            <publishOdom>true</publishOdom>
+            <publishOdomTf>false</publishOdomTf>
+            <publisherWheelTf>true</publisherWheelTf>
+
+            <odomFrame>odom</odomFrame>
+            <odom_base_frame>base_link</odom_base_frame>
+            <!-- set true for swap wheels -->
+            <!-- <legacyMode>false</legacyMode>  -->
+
+        </plugin>
+    </gazebo>
+
+</robot>
