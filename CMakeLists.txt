@@ -42,3 +42,11 @@ if(BUILD_TESTING)
 endif()
 
 ament_package()
+
+install(PROGRAMS
+  script/joystick_control.py
+  script/point_follow.py
+  script/multipoint_follow.py
+  script/ultrasonic_sensor_obstacle_avoidance.py
+  DESTINATION lib/${PROJECT_NAME}
+)
