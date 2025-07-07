@@ -6,43 +6,25 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 # find dependencies
+find_package(rclpy REQUIRED)
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
 
-
-install(DIRECTORY rviz urdf launch world model script
-        DESTINATION share/${PROJECT_NAME}
+# install non-Python assets
+install(DIRECTORY
+  rviz
+  urdf
+  launch
+  world
+  model
+  DESTINATION share/${PROJECT_NAME}
 )
 
-install( DIRECTORY config/
-         DESTINATION share/${PROJECT_NAME}/config)
-         
-install(PROGRAMS script/joystick_control.py
-        DESTINATION lib/${PROJECT_NAME})
-install(PROGRAMS script/multipoint_follow.py
-        DESTINATION lib/${PROJECT_NAME})
-install(PROGRAMS script/point_follow.py
-        DESTINATION lib/${PROJECT_NAME})
-install(PROGRAMS script/ultrasonic_sensor_obstacle_avoidance.py
-        DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY
+  config/
+  DESTINATION share/${PROJECT_NAME}/config
+)
 
-
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
-
-ament_package()
-
+# install your Python scripts as executables
 install(PROGRAMS
   script/joystick_control.py
   script/point_follow.py
@@ -50,3 +32,5 @@ install(PROGRAMS
   script/ultrasonic_sensor_obstacle_avoidance.py
   DESTINATION lib/${PROJECT_NAME}
 )
+
+ament_package()
