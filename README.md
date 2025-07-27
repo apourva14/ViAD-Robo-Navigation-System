@@ -49,24 +49,6 @@ This project combines an Arduino-based two-wheel differential robot with ROS 2 H
 
 ---
 
-## 📂 Repository Layout
-obstacle-detection-bot/
-├── CMakeLists.txt
-├── package.xml
-├── launch/ # ROS 2 launch files
-├── urdf/ # Robot description (XACRO/URDF)
-├── world/ # Gazebo worlds
-├── model/ # Gazebo models
-├── rviz/ # RViz configurations
-├── script/ # Python nodes:
-│ ├── joystick_control.py
-│ ├── point_follow.py
-│ ├── multipoint_follow.py
-│ └── ultrasonic_sensor_obstacle_avoidance.py
-├── config/ # Nav2 / SLAM params
-├── img/ # Project screenshots & diagrams
-└── README.md # ← you are here
-
 ## Install ROS and Gazebo deps
 sudo apt update
 sudo apt install -y \
@@ -77,26 +59,26 @@ sudo apt install -y \
   python3-colcon-common-extensions
 
 ## Build the workspace
-# Source ROS 2
+### Source ROS 2
 source /opt/ros/humble/setup.bash
 
-# Build
+### Build
 colcon build --merge-install
 
-# Overlay
+### Overlay
 source install/setup.bash
 
 ## ▶️ Running the Gazebo Simulation
-# Launch Gazebo + robot
+### Launch Gazebo + robot
 ros2 launch rav_bot rav_gazebo.launch.py
 You should see the small_warehouse world and your robot spawn.
 
-# Start the obstacle-avoidance node
+### Start the obstacle-avoidance node
 ros2 run rav_bot ultrasonic_sensor_obstacle_avoidance.py \
   --ros-args --remap /cmd_vel:=/rav_bot/cmd_vel
 The node will process simulated /scan (or /ultrasonic) and publish to /rav_bot/cmd_vel.
 
-# Visualize in RViz (optional)
+### Visualize in RViz (optional)
 ros2 launch rav_bot rviz.launch.py
 Inspect TF frames, robot model, and sensor topics.
 
@@ -105,6 +87,6 @@ Assemble your chassis with Arduino Nano, motors, motor driver, IR sensors, and u
 
 Flash firmware to Arduino using rosserial or micro-ROS:
 
-# Example with rosserial_python
+#### Example with rosserial_python
 ros2 run rosserial_python serial_node --dev /dev/ttyACM0
 Power on and confirm obstacle avoidance in your environment.
