@@ -2,14 +2,7 @@
 
 It integrates **Vision Transformers (ViT)** for perception, **LLMs** for reasoning, and **Decision Transformers (DT)** for low-level control, all built on **ROS 2 Humble** with Gazebo simulation and Arduino hardware. 
 - **Vision Transformers** for semantic scene understanding. **LLMs** to interpret natural-language commands and choose subgoals. **Decision Transformers** for data-driven low-level control.**ROS 2 + Gazebo** for simulation-to-real transfer.**Arduino Nano + Sensors** for affordable hardware deployment
-Below you’ll find:
 
-- **Software prerequisites**  
-- **Hardware requirements**
-- **Setup & build instructions**  
-- **How to run the Gazebo simulation**  
-- **How to deploy on real hardware**  
-- **Dataset + Training (Decision Transformer)**  
 <div style="display: flex; justify-content: center; gap: 16px;">
   <div style="border: 2px solid #444; padding: 4px;">
     <img src="img/Hardware_.jpg" alt="First diagram" style="display: block; max-width: 100%; height: auto;">
