@@ -1,13 +1,19 @@
-# Obstacle Detection Bot
+# ViAD-Robo-Navigation-System
 
-This project combines an Arduino-based two-wheel differential robot with ROS 2 Humble and Gazebo Classic simulation for robust obstacle detection and avoidance. Below you’ll find:
+It integrates **Vision Transformers (ViT)** for perception, **LLMs** for reasoning, and **Decision Transformers (DT)** for low-level control, all built on **ROS 2 Humble** with Gazebo simulation and Arduino hardware. 
+- **Vision Transformers** for semantic scene understanding  
+- **LLMs** to interpret natural-language commands and choose subgoals  
+- **Decision Transformers** for data-driven low-level control  
+- **ROS 2 + Gazebo** for simulation-to-real transfer  
+- **Arduino Nano + Sensors** for affordable hardware deployment
+Below you’ll find:
 
 - **Software prerequisites**  
 - **Hardware requirements**
 - **Setup & build instructions**  
 - **How to run the Gazebo simulation**  
 - **How to deploy on real hardware**  
-- **Troubleshooting tips**  
+- **Dataset + Training (Decision Transformer)**  
 <div style="display: flex; justify-content: center; gap: 16px;">
   <div style="border: 2px solid #444; padding: 4px;">
     <img src="img/Hardware_.jpg" alt="First diagram" style="display: block; max-width: 100%; height: auto;">
@@ -74,24 +80,38 @@ colcon build --merge-install
 ### Overlay
 source install/setup.bash
 
-## ▶️ Running the Gazebo Simulation
-### Launch Gazebo + robot
-- ros2 launch rav_bot rav_gazebo.launch.py
-You should see the small_warehouse world and your robot spawn.
+## ▶️ Running Simulation
+# Launch Gazebo simulation
+ros2 launch rav_bot rav_gazebo.launch.py
 
-### Start the obstacle-avoidance node
-- ros2 run rav_bot ultrasonic_sensor_obstacle_avoidance.py \ --ros-args --remap /cmd_vel:=/rav_bot/cmd_vel
-The node will process simulated /scan (or /ultrasonic) and publish to /rav_bot/cmd_vel.
+# Run ViT perception node
+ros2 run rav_bot perception_node
 
-### Visualize in RViz (optional)
-- ros2 launch rav_bot rviz.launch.py
-Inspect TF frames, robot model, and sensor topics.
+# Run LLM planner
+ros2 run rav_bot llm_planner_node --ros-args --param model=phi-3-mini
 
-## 🚀 Deploying on Real Hardware
-Assemble your chassis with Arduino Nano, motors, motor driver, IR sensors, and ultrasonic sensor.
+# Run Decision Transformer policy
+ros2 run rav_bot policy_server_node --ros-args --param ckpt=dt_best.ckpt
 
-Flash firmware to Arduino using rosserial or micro-ROS:
 
-#### Example with rosserial_python
-- ros2 run rosserial_python serial_node --dev /dev/ttyACM0
-Power on and confirm obstacle avoidance in your environment.
+##  Deploying on Real Hardware
+# Flash Arduino firmware
+arduino-cli upload -p /dev/ttyUSB0 --fqbn arduino:avr:nano firmware/
+
+# Start micro-ROS agent
+ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
+
+# Send velocity commands
+ros2 topic pub /rav_bot/cmd_vel geometry_msgs/Twist ...
+
+
+#### Dataset + Training (Decision Transformer)
+# Collect expert rollouts
+ros2 launch rav_bot nav2_expert.launch.py --ros-args -p record:=true
+
+# Train DT
+python train_dt.py --dataset data/rosbags --config configs/dt.yaml
+
+# Evaluate in Gazebo
+ros2 run rav_bot policy_server_node --ros-args -p ckpt=outputs/dt_best.ckpt
+
