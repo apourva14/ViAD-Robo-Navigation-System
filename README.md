@@ -1,5 +1,6 @@
 # ViAD-Robo-Navigation-System
 
+Selected for WiML@NeurIPS: https://openreview.net/forum?id=3mheFjRGDF 
 It integrates **Vision Transformers (ViT)** for perception, **LLMs** for reasoning, and **Decision Transformers (DT)** for low-level control, all built on **ROS 2 Humble** with Gazebo simulation and Arduino hardware. 
 - **Vision Transformers** for semantic scene understanding. **LLMs** to interpret natural-language commands and choose subgoals. **Decision Transformers** for data-driven low-level control.**ROS 2 + Gazebo** for simulation-to-real transfer.**Arduino Nano + Sensors** for affordable hardware deployment
 
