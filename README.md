@@ -1,4 +1,4 @@
-# ViAD-Robo-Navigation-System
+# ViAD-Robo-Navigation-System (WiML@NeurIPS)
 
 Selected for WiML@NeurIPS: https://openreview.net/forum?id=3mheFjRGDF 
 It integrates **Vision Transformers (ViT)** for perception, **LLMs** for reasoning, and **Decision Transformers (DT)** for low-level control, all built on **ROS 2 Humble** with Gazebo simulation and Arduino hardware. 
