@@ -2,23 +2,7 @@
 
 Selected for WiML@NeurIPS: https://openreview.net/forum?id=3mheFjRGDF 
 
-For decades, visualization and comprehension of the real world environment has been a bottleneck in building
-robust navigation robotics systems. It has been quite popular to utilize LiDAR/ultrasonic cameras in order to
-understand 3-D space. This method of visualization leverages the obstacle coordinates in order to compute its
-distance from the obstacle, however it acts as a limitation to the real-time contextual scene understanding.
-Clutter, new lighting or any real-time changes in the environment usually confuses the system. When it came
-to planning, it was quite popular to use Nav2 which followed a very rigid planning pattern and a rule based
-approach. For example: “if an obstacle is detected, turn right, else go straight”. Its inability to adapt to
-dynamic tasks like “avoid moving objects” made it inflexible. Along with this, it lacked natural language
-control. In recent times, LLMs have been utilized to overcome this issue. When it came to low-level
-execution like directing wheel speed and frequency, it lacked memory based learning nor did it have any way
-to leverage offline datasets for policy improvement. Commands could be only understood by either feeding
-coordinates or numeric terms and had no semantic grounding for user commands. In order to overcome these
-issues, we propose ViAD - Visualize, Analyse and Decide methodology. It consists of leveraging Vision
-Transformers to get the raw visual perception of the environment, an LLM for comprehension and strategic
-planning, and Decision Transformers to implement low level execution leveraging memory-based learning.
-Each component is crucial to make our robot more adaptable, understandable and strategically navigable.
-
+Please read the ViAD-A_Novel_Strategic_Robotic_Navigation_Methodology.pdf for abstract.
 
 It integrates **Vision Transformers (ViT)** for perception, **LLMs** for reasoning, and **Decision Transformers (DT)** for low-level control, all built on **ROS 2 Humble** with Gazebo simulation and Arduino hardware. 
 - **Vision Transformers** for semantic scene understanding. **LLMs** to interpret natural-language commands and choose subgoals. **Decision Transformers** for data-driven low-level control.**ROS 2 + Gazebo** for simulation-to-real transfer.**Arduino Nano + Sensors** for affordable hardware deployment
